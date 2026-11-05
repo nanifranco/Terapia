@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F5F1E9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Terapia">
+  <title>Terapia</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="bg" viewBox="0 0 330 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <circle class="sh" cx="300" cy="40" r="90" fill="#EDE6D9"/>
+    <circle class="sh s2" cx="-10" cy="470" r="110" fill="#EFE8DC"/>
+    <circle class="sh s3" cx="290" cy="620" r="60" fill="#F1D9D2"/>
+    <circle cx="300" cy="40" r="90" fill="none" stroke="#E2D8C6" stroke-width="1"/>
+  </svg>
+
+  <!-- Pantalla de bloqueo: lo único visible hasta pasar Face ID -->
+  <main id="lock" class="lock">
+    <h1 class="title serif">Para mi<br><em>sesión</em></h1>
+    <p class="muted" id="lockMsg">Solo tú puedes abrirla</p>
+    <div class="fid" id="fid"><span class="ic" data-icon="face-id" aria-hidden="true"></span></div>
+    <button id="unlockBtn" class="btn-dark">Desbloquear con Face ID</button>
+    <p class="err" id="lockErr" role="alert"></p>
+  </main>
+
+  <!-- App: solo se dibuja después de desbloquear -->
+  <main id="app" class="app" hidden>
+    <header class="top">
+      <span id="today" class="date"></span>
+      <div class="top-actions">
+        <button id="menuBtn" class="icon-btn" aria-label="Más opciones"><span class="ic" data-icon="dots" aria-hidden="true"></span></button>
+        <button id="lockBtn" class="icon-btn" aria-label="Bloquear"><span class="ic" data-icon="lock" aria-hidden="true"></span></button>
+      </div>
+    </header>
+
+    <h1 class="title serif">Para mi<br><em>sesión</em></h1>
+    <p class="hint">Mantén presionado para cambiar el orden</p>
+    <div class="rule"></div>
+
+    <ul id="list" class="list"></ul>
+    <p id="empty" class="empty serif" hidden>Nada pendiente por ahora</p>
+
+    <div class="hablados-wrap">
+      <button id="habBtn" class="hab-toggle serif" aria-expanded="false">
+        Ya hablados <span class="ic" data-icon="chevron-down" aria-hidden="true"></span>
+      </button>
+      <ul id="habList" class="hab-list" hidden></ul>
+    </div>
+
+    <form id="addForm" class="add" autocomplete="off">
+      <input id="inp" type="text" placeholder="Algo que quiero hablar…" enterkeyhint="done" aria-label="Nuevo tema">
+      <button type="submit" class="add-btn" aria-label="Agregar"><span class="ic" data-icon="plus" aria-hidden="true"></span></button>
+    </form>
+    <p id="addErr" class="err add-err" role="alert"></p>
+  </main>
+
+  <div id="toast" class="toast" role="status" hidden>
+    <span id="toastMsg"></span>
+    <button id="undoBtn" class="toast-btn">Deshacer</button>
+  </div>
+
+  <div id="sheet" class="sheet-backdrop" hidden>
+    <div class="sheet" role="dialog" aria-label="Más opciones">
+      <button id="exportBtn" class="sheet-item"><span class="ic" data-icon="download" aria-hidden="true"></span>Exportar respaldo</button>
+      <button id="importBtn" class="sheet-item"><span class="ic" data-icon="upload" aria-hidden="true"></span>Importar respaldo</button>
+      <button id="closeSheet" class="sheet-item sheet-cancel">Cerrar</button>
+      <input id="importFile" type="file" accept="application/json,.json" hidden>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
