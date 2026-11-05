@@ -1,4 +1,4 @@
-const CACHE = 'terapia-v1';
+const CACHE = 'terapia-v2';
 const SHELL = [
   './',
   './index.html',
